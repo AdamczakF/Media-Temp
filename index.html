@@ -6,8 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8" />
     <meta property="twitter:card" content="summary_large_image" />
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3HBLX5L0WX"></script>
+    <script>
+      function detectMobile() {
+        var userAgent = navigator.userAgent;
+  
+        // List of common mobile user agent strings
+        var mobileAgents = [
+          'Mobile Safari',
+          'Android',
+          'iPhone',
+          'iPad',
+          'Windows Phone'
+        ];
+  
+        var isMobile = false;
+  
+        for (var i = 0; i < mobileAgents.length; i++) {
+          if (userAgent.indexOf(mobileAgents[i]) !== -1) {
+            isMobile = true;
+            break;
+          }
+        }
+  
+        if (isMobile) {
+          // Handle mobile device (block access with 403 Forbidden)
+          var xmlhttp = new XMLHttpRequest();
+          xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState === 4) {
+              if (xmlhttp.status === 403) {
+                // Handle the 403 Forbidden response
+                // You can display an error message or redirect the user to an error page
+                window.location.href = 'error-page.html';
+              } else {
+                // Handle other response statuses
+                // ...
+              }
+            }
+          };
+          xmlhttp.open('GET', 'block-mobile.php', true);
+          xmlhttp.send();
+        } else {
+          // Continue with desktop-only logic or render the regular page
+          // ...
+        }
+      }
+    </script>
+ <script async src="https://www.googletagmanager.com/gtag/js?id=G-3HBLX5L0WX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -68,7 +112,7 @@
     />
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body>
+  <body onload="detectMobile()">
     <div>
       <script
         type="text/javascript"
