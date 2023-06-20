@@ -7,51 +7,37 @@
     <meta charset="utf-8" />
     <meta property="twitter:card" content="summary_large_image" />
     <script>
-      function detectMobile() {
-        var userAgent = navigator.userAgent;
-  
-        // List of common mobile user agent strings
-        var mobileAgents = [
-          'Mobile Safari',
-          'Android',
-          'iPhone',
-          'iPad',
-          'Windows Phone'
-          'Chrome/114.0.0.0 Mobile'
-        ];
-  
-        var isMobile = false;
-  
-        for (var i = 0; i < mobileAgents.length; i++) {
-          if (userAgent.indexOf(mobileAgents[i]) !== -1) {
-            isMobile = true;
-            break;
-          }
-        }
-  
-        if (isMobile) {
-          // Handle mobile device (block access with 403 Forbidden)
-          var xmlhttp = new XMLHttpRequest();
-          xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState === 4) {
-              if (xmlhttp.status === 403) {
-                // Handle the 403 Forbidden response
-                // You can display an error message or redirect the user to an error page
-                window.location.href = 'error-page.html';
-              } else {
-                // Handle other response statuses
-                // ...
-              }
-            }
-          };
-          xmlhttp.open('GET', 'block-mobile.php', true);
-          xmlhttp.send();
-        } else {
-          // Continue with desktop-only logic or render the regular page
-          // ...
+    function detectMobile() {
+      var userAgent = navigator.userAgent;
+
+      // List of common mobile user agent strings
+      var mobileAgents = [
+        'Mobile Safari',
+        'Android',
+        'iPhone',
+        'iPad',
+        'Windows Phone'
+        'Chrome/114.0.0.0 Mobile'
+      ];
+
+      var isMobile = false;
+
+      for (var i = 0; i < mobileAgents.length; i++) {
+        if (userAgent.indexOf(mobileAgents[i]) !== -1) {
+          isMobile = true;
+          break;
         }
       }
-    </script>
+
+      if (isMobile) {
+        // Handle mobile device (e.g., redirect or block access)
+        window.location.href = 'mobile-only-page.html';
+      } else {
+        // Continue with desktop-only logic or render the regular page
+        // ...
+      }
+    }
+  </script>
  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3HBLX5L0WX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
